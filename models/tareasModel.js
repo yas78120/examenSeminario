@@ -1,15 +1,23 @@
 import mongoose from "../connection/connect.js";
+import modelenum from "../utils/enumModel.js";
+import RolesModel from "./rolesModel.js";
 class TareasModel{
-    Constructor(){
+    constructor() {
         this.Schema = mongoose.Schema;
-        this.TareaSchema = new this.Schema({
+        this.TareaSchema = new this.Schema ({
             name: String,
             description: String,
             date: Date,
             hour: String,
-            done: Boolean,
+            done: Boolean
         });
-        this.mymodel = mongoose.model("tareas", this.TareaSchema);
+        //this.mymodel = mongoose.model("tareas", this.TareaSchema);
+        if (modelenum["tareas"] == null) {
+            this.mymodel = mongoose.model("tareas", this.TareaSchema);
+            modelenum["tareas"] = this.mymodel;
+        } else {
+            this.mymodel = modelenum["tareas"];
+        }
     }
     createTareas(name, description, date, hour, done){
         var tarea = {
@@ -17,11 +25,11 @@ class TareasModel{
         }
         var newtarea = new this.mymodel(tarea);
         return new Promise ((resolve, reject) => {
-            newtarea.save().then((err, docs) => {
+            newtarea.save().then((docs) => {
                 console.log("tarea registrada");
                 resolve(docs);
             });
-        })
+        });
     }
     getTareas(){
         return new Promise((resolve, reject) => {
