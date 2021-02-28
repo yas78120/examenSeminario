@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
-mongoose.connect(
-  `mongodb://${process.env.IPHOSTDB}:${process.env.PORTDB}/${process.env.NAMEDB}`,
+mongoose.connect("mongodb://172.24.0.2:27017/Tareas",
   {
     useNewUrlParser: true,
   }
