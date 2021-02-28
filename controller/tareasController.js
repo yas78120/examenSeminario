@@ -26,8 +26,14 @@ class TareaController {
         }
         async deleteTareas(request, response){
             var id = request.params.id;
-            var result = await TAREA.deleteTareas(id)
+            var result = await TAREA.deleteTareas(id);
             response.status(200).json(result);
         }
+        async hechoTareas(request, response) {
+            var id = request.params.id;
+            var updatedata = request.body;
+            var result = await TAREA.hechoTareas(id, updatedata);
+            response.status(200).json({ serverResponse:result });
+          }
 }
 export default TareaController;

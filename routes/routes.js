@@ -47,4 +47,5 @@ router.post("/tareas", tareascontroller.createTareas);
 router.get("/tareas", tareascontroller.getTareas);
 router.put("/tareas/:id", tareascontroller.updateTareas);
 router.delete("/tareas/:id", tareascontroller.deleteTareas);
+router.put("/tareas/done/:id", tareascontroller.hechoTareas);
 export default router;

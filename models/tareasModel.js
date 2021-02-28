@@ -9,7 +9,10 @@ class TareasModel{
             description: String,
             date: Date,
             hour: String,
-            done: Boolean
+            done: {
+                type: Boolean,
+                default: false,
+            }
         });
         //this.mymodel = mongoose.model("tareas", this.TareaSchema);
         if (modelenum["tareas"] == null) {
@@ -70,7 +73,17 @@ class TareasModel{
             });
         });
     }
-
+    async hechoTareas(id) {
+        console.log(id);
+        const result = await this.mymodel.update(
+          { _id: id },
+          { $set: { done: true } }
+        );
+        console.log(result);
+        return result;
+        
+      }
+      
     getModel(){
         return this.mymodel;
     }
